@@ -1,0 +1,1090 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/js/autocomplete/jquery.autocomplete.css">
+	<link rel="stylesheet" href="/css/page.css">
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/autocomplete/jquery.autocomplete.js"></script>
+	<style type="text/css">
+		body {
+			background: url("/images/1_bg.jpg") repeat;
+			background-size: 100%;
+		}
+		a {
+			color:white;
+		}
+		.post_add {
+			position: absolute;
+			top: 10px;
+			left: 20px;
+		}
+		.post_add span {
+			background-color: #d9a664;
+			color: #5d4424;
+			border-radius: 20px;
+			display: inline-block;
+			cursor: pointer;
+			padding: 4px 10px;
+		}
+				.states {
+			background-color: rgba(0, 0, 0, 0.4);
+			border: 3px solid #C85D60;
+		}
+		.states .top_area {
+			position: relative;
+			width: 280px;
+			margin: auto;
+		}
+		.states .top_area > img {
+			width: 100%;
+		}
+		.states .top_area > div {
+			width: 100%;
+			position: absolute;
+			top: 7px;
+		}
+		.states .top_area > div img {
+			width: auto;
+			height: 18px;
+		    vertical-align: sub;
+		    margin-right: 5px;
+		}
+		.states .list_area {
+			padding: 20px;
+			line-height: 24px;
+			column-count:7;
+		}
+		.states .list_area li {
+			padding: 10px 30px;
+			display: inline-block;
+			vertical-align: top;
+		}
+		.states .list_area img {
+			width: auto;
+			height: 15px;
+			vertical-align: baseline;
+		}
+		/*移动端*/
+		@media  screen and (max-width:980px) {
+			body {
+				background-size: unset;
+			}
+			.states .list_area {
+				padding: 0.2rem;
+    			line-height: 1.4rem;
+				column-count: 3;
+			}
+			.states .list_area li {
+			    padding: 0.5rem;
+				width: calc(33vw - 2rem);
+			}
+			.states .list_area li p {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header id="header">
+<a href="/index.html"><img src="/images/logo.png" style="width: 190px ; display: block; margin: auto; margin-top: -8px ;"></a>
+	<div class="post_add">
+		<a href="/ads/create.html"><span>Post Ad</span></a>
+	</div>
+<ul class="white-font menu">
+    	<li>
+		<a href="/ads.html"><span>Manage Ads</span></a>
+	</li>
+	<li>
+		<a href="/order/create.html"><span>Buy Credits</span></a>
+	</li>
+	<li>
+		<a href="/users/change_password.html"><span>Change Password</span></a>
+	</li>
+    	</ul>
+<ul class="white-font user">
+	<li>
+		<span>
+		    <input type="checkbox" name="switch1" id="switch1" class="choose-btn">
+		    <label for="switch1" class="choose-label"></label>
+		</span>
+	</li>
+    	<li>
+		<span>shang</span>
+	</li>
+	<li>
+		<span><a href="/index.html">Logout</a></span>
+	</li>
+	</ul>
+<div class="menu_phone" style="display: none;">
+	<div class="switch_btn">
+	    <input type="checkbox" name="switch1" id="switch2" class="choose-btn">
+	    <label for="switch2" class="choose-label"></label>
+	</div>
+	<div class="white-font menu_list">
+		<div id="menu_btn">
+			<span>Menu</span>
+			<img src="/images/down.png" class="menu_icon down">
+			<img src="/images/up.png" class="menu_icon up" style="display: none;">
+		</div>
+		<ul class="white-font" style="display: none;">
+    					<li class="active">
+				<a href="/ads/create.html"><span>Post Ad</span></a>
+			</li>
+			<li>
+				<a href="/ads.html"><span>Manage Ads</span></a>
+			</li>
+			<li>
+				<a href="/order/create.html"><span>Buy Credits</span></a>
+			</li>
+			<li>
+				<a href="/users/change_password.html"><span>Change Password</span></a>
+			</li>
+			<li>
+				<span><a href="/index.html">Logout</a></span>
+			</li>
+					</ul>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	$(".menu > li").click(function() {
+		$(this).parent().children().removeClass("active");
+		$(this).addClass("active");
+	});
+
+	var menu_status = 0;
+
+	$("#menu_btn span").click(function() {
+		if(menu_status) {
+			$(".menu_list .down").show();
+			$(".menu_list .up").hide();
+			$(".menu_list ul").hide();
+			menu_status = 0;
+		}else {
+			$(".menu_list .down").hide();
+			$(".menu_list .up").show();
+			$(".menu_list ul").show();
+			menu_status = 1;
+		}
+	})
+</script>
+</header>
+	<div class="main">
+<div class="search content">
+			<p class="white-font">Choose a locations:</p>
+			<form id="search_box" action="javascript:;">
+			<div class="search_area">
+				<input type="text" id="city_search" name="keyword" placeholder="Type your city name">
+				<img src="/images/search.png" class="btn">
+			</div>
+			</form>
+		</div>
+  
+		<div class="states content">
+    			<div class="top_area">
+				<img src="/images/states_top_bg.png">
+				<div class="center">
+					<img src="/images/flag.png">
+					<span class="white-font size-18">United States</span>
+				</div>
+			</div>
+			<ul class="list_area waterfall">
+      				<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Alabama.jpg"><a href="/location/2.html" style="color:yellow;">Alabama</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/53.html">Auburn</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/54.html">Birmingham</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/55.html">Dothan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/56.html">Gadsden</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/57.html">Huntsville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/58.html">Mobile</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/59.html">Montgomery</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/60.html">Muscle Shoals</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/61.html">Tuscaloosa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/62.html">Vestavia Hills</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Alaska.jpg"><a href="/location/3.html" style="color:yellow;">Alaska</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/63.html">Anchorage</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/64.html">Fairbanks</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/65.html">Juneau</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/66.html">Kenai Peninsula</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Arizona.jpg"><a href="/location/4.html" style="color:yellow;">Arizona</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/67.html">Flagstaff/Sedona</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/68.html">Mesa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/69.html">Mohave County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/70.html">Phoenix</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/71.html">Prescott</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/72.html">Show Low</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/73.html">Sierra Vista</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/74.html">Tucson</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/75.html">Yuma</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Arkansas.jpg"><a href="/location/5.html" style="color:yellow;">Arkansas</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/76.html">Fayetteville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/77.html">Fort Smith</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/78.html">Jonesboro</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/79.html">Little Rock</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/California.jpg"><a href="/location/6.html" style="color:yellow;">California</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/80.html">Bakersfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/81.html">Chico</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/82.html">Dubin</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/83.html">Fresno</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/84.html">Humboldt County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/85.html">Imperial County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/86.html">Inland Empire</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/87.html">La Jolla</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/88.html">Long Beach</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/89.html">Los Angeles</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/90.html">Madera</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/91.html">Mendocino</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/92.html">Merced</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/93.html">Modesto</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/94.html">Monterey</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/95.html">North Bay</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/96.html">Oakland/East Bay</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/97.html">Orange County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/98.html">Palm Springs</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/99.html">Palmdale/Lancaster</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/100.html">Redding</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/101.html">Sacramento</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/102.html">San Diego</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/103.html">San Fernando Valley</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/104.html">San Francisco</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/105.html">San Gabriel Valley</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/106.html">San Jose</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/107.html">San Luis Obispo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/108.html">San Mateo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/109.html">Santa Ana</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/110.html">Santa Barbara</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/111.html">Santa Cruz</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/112.html">Santa Maria</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/113.html">Siskiyou</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/114.html">Stockton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/115.html">Susanville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/116.html">Tulare</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/117.html">Vacaville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/118.html">Ventura</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/119.html">Visalia</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Colorado.jpg"><a href="/location/7.html" style="color:yellow;">Colorado</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/120.html">Boulder</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/121.html">Colorado Springs</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/122.html">Denver</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/123.html">Fort Collins</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/124.html">Pueblo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/125.html">Rockies</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/126.html">Western Slope</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Connecticut.jpg"><a href="/location/8.html" style="color:yellow;">Connecticut</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/127.html">Bridgeport</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/128.html">Connecticut</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/129.html">Eastern Connecticut</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/130.html">Hartford</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/131.html">Meriden</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/132.html">New Haven</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/133.html">Northwest </a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/134.html">Stratford</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/135.html">Wallingford</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Delaware.jpg"><a href="/location/9.html" style="color:yellow;">Delaware</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/136.html">Dover</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/137.html">Seaford</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Florida.jpg"><a href="/location/10.html" style="color:yellow;">Florida</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/138.html">Daytona</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/139.html">Destin</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/140.html">Fort Lauderdale</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/141.html">Fort Myers</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/142.html">Gainesville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/143.html">Jacksonville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/144.html">Keys</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/145.html">Lakeland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/146.html">Lauderdale</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/147.html">Miami</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/148.html">Naples</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/149.html">Ocala</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/150.html">Okaloosa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/151.html">Orlando</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/152.html">Palm Bay</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/153.html">Panama City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/154.html">Pensacola</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/155.html">Sarasota/Bradenton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/156.html">Space Coast</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/157.html">St. Augustine</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/158.html">Tallahassee</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/159.html">Tampa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/160.html">Treasure Coast</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/161.html">West Palm Beach</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Georgia.jpg"><a href="/location/11.html" style="color:yellow;">Georgia</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/162.html">Albany</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/163.html">Athens</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/164.html">Atlanta</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/165.html">Augusta</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/166.html">Brunswick</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/167.html">Columbus</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/168.html">Macon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/169.html">Mcdonough</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/170.html">Northwest Georgia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/171.html">Savannah</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/172.html">Statesboro</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/173.html">Valdosta</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Hawaii.jpg"><a href="/location/12.html" style="color:yellow;">Hawaii</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/174.html">Big Island</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/175.html">Honolulu</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/176.html">Kauai</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/177.html">Maui</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Idaho.jpg"><a href="/location/13.html" style="color:yellow;">Idaho</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/178.html">Boise</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/179.html">East Idaho</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/180.html">Lewiston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/181.html">Twin Falls</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Illinois.jpg"><a href="/location/14.html" style="color:yellow;">Illinois</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/182.html">Bartlett</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/183.html">Bloomington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/184.html">Carbondale</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/185.html">Chambana</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/186.html">Chicago</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/187.html">Crest Hill</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/188.html">Decatur</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/189.html">Highland Park</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/190.html">Kankakee</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/191.html">La Salle County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/192.html">Mattoon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/193.html">Peoria</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/194.html">Rockford</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/195.html">Springfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/196.html">Western Illinois</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Indiana.jpg"><a href="/location/15.html" style="color:yellow;">Indiana</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/197.html">Avon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/198.html">Bloomington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/199.html">Evansville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/200.html">Ft Wayne</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/201.html">Indianapolis</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/202.html">Kokomo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/203.html">Lafayette</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/204.html">Muncie</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/205.html">Richmond</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/206.html">South Bend</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/207.html">Terre Haute</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Iowa.jpg"><a href="/location/16.html" style="color:yellow;">Iowa</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/208.html">Ames</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/209.html">Cedar Rapids</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/210.html">Desmoines</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/211.html">Dubuque</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/212.html">Fort Dodge</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/213.html">Iowa City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/214.html">Mason City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/215.html">Omaha</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/216.html">Quad Cities</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/217.html">Sioux City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/218.html">Southest Iowa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/219.html">Waterloo</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Kansas.jpg"><a href="/location/17.html" style="color:yellow;">Kansas</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/220.html">Emporia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/221.html">Lawrence</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/222.html">Manhattan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/223.html">Salina</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/224.html">Topeka</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/225.html">Wichita</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Kentucky.jpg"><a href="/location/18.html" style="color:yellow;">Kentucky</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/226.html">Bowling Green</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/227.html">Eastern Kentucky</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/228.html">Florence</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/229.html">Lexington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/230.html">Louisville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/231.html">Owensboro</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/232.html">Western Kentucky</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Louisiana.jpg"><a href="/location/19.html" style="color:yellow;">Louisiana</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/233.html">Alexandria</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/234.html">Baton Rouge</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/235.html">Bossier City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/236.html">Broussard</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/237.html">Hammmond</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/238.html">Houma</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/239.html">Lafayette</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/240.html">Lake Charles</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/241.html">Metairie</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/242.html">Monroe</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/243.html">New Iberia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/244.html">New Orleans</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/245.html">Shreveport</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Maine.jpg"><a href="/location/20.html" style="color:yellow;">Maine</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/246.html">Old Orchard Beach</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Maryland.jpg"><a href="/location/21.html" style="color:yellow;">Maryland</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/247.html">Annapolis</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/248.html">Baltimore</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/249.html">Cumberland Valley</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/250.html">Eastern Shore</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/251.html">Frederick</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/252.html">Germantown</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/253.html">Western Maryland</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Massachusetts.jpg"><a href="/location/22.html" style="color:yellow;">Massachusetts</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/254.html">Boston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/255.html">Brockton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/256.html">Cape Cod</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/257.html">Hopedale</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/258.html">Lowell</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/259.html">Sharon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/260.html">South Coast</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/261.html">Springfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/262.html">Worcester</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Michigan.jpg"><a href="/location/23.html" style="color:yellow;">Michigan</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/263.html">Ann Arbor</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/264.html">Battle Creek</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/265.html">Central Michigan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/266.html">Clinton Twp</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/267.html">Detroit</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/268.html">Flint</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/269.html">Grand Rapids</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/270.html">Holland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/271.html">Jackson</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/272.html">Kalamazoo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/273.html">Lansing</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/274.html">Monroe</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/275.html">Muskegon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/276.html">Northern Michigan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/277.html">Novi</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/278.html">Port Huron</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/279.html">Saginaw</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/280.html">Southfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/281.html">Southwest Michigan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/282.html">Upper Peninsula</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Minnesota.jpg"><a href="/location/24.html" style="color:yellow;">Minnesota</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/283.html">Bedford</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/284.html">Bemidji</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/285.html">Brainerd</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/286.html">Duluth</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/287.html">Mankato</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/288.html">Minneapolis / St. Paul</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/289.html">Otsego</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/290.html">Rochester</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/291.html">St. Cloud</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/292.html">Stillwater</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/293.html">Wayland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/294.html">Willmar</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Mississippi.jpg"><a href="/location/25.html" style="color:yellow;">Mississippi</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/295.html">Biloxi</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/296.html">Hattiesburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/297.html">Jackson</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/298.html">Meridian</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/299.html">North Mississippi</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/300.html">Southwest Mississippi</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Missouri.jpg"><a href="/location/26.html" style="color:yellow;">Missouri</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/301.html">Columbia/Jeff City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/302.html">Joplin</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/303.html">Kansas City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/304.html">Kirksville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/305.html">Lake Of The Ozarks</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/306.html">Southeast Missouri</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/307.html">Springfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/308.html">St Joseph</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/309.html">St. Louis</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Montana.jpg"><a href="/location/27.html" style="color:yellow;">Montana</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/310.html">Billings</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/311.html">Bozeman</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/312.html">Butte</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/313.html">Great Falls</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/314.html">Helena</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/315.html">Kalispell</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/316.html">Missoula</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Nebraska.jpg"><a href="/location/28.html" style="color:yellow;">Nebraska</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/317.html">Grand Island</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/318.html">Lincoln</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/319.html">North Platte</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/320.html">Omaha</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/321.html">Scottsbluff</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Nevada.jpg"><a href="/location/29.html" style="color:yellow;">Nevada</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/322.html">Elko</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/323.html">Las Vegas</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/324.html">Reno</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/325.html">Sparks</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/New Hampshire.jpg"><a href="/location/30.html" style="color:yellow;">New Hampshire</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/326.html">New Hampshire</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/New Jersey.jpg"><a href="/location/31.html" style="color:yellow;">New Jersey</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/327.html">Central Jersey</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/328.html">Jersey Shore</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/329.html">North Jersey</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/330.html">South Jersey</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/New Mexico.jpg"><a href="/location/32.html" style="color:yellow;">New Mexico</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/331.html">Albuquerque</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/332.html">Clovis / Portales</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/333.html">Farmington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/334.html">Las Cruces</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/335.html">Roswell / Carlsbad</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/336.html">Santa Fe/Taos</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/New York.jpg"><a href="/location/33.html" style="color:yellow;">New York</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/337.html">Albany</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/338.html">Binghamton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/339.html">Bronx</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/340.html">Brooklyn</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/341.html">Buffalo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/342.html">Butler</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/343.html">Catskills</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/344.html">Chautauqua</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/345.html">Elmira</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/346.html">Fairfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/347.html">Finger Lakes</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/348.html">Flushing</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/349.html">Glens Falls</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/350.html">Hudson Valley</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/351.html">Ithaca</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/352.html">Long Island</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/353.html">Manhattan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/354.html">Oneonta</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/355.html">Plattsburgh</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/356.html">Port Jefferson Station</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/357.html">Potsdam</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/358.html">Queens</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/359.html">Rochester</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/360.html">Staten Island</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/361.html">Syracuse</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/362.html">Twin Tiers</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/363.html">Utica</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/364.html">Watertown</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/365.html">Westchester</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/North Carolina.jpg"><a href="/location/34.html" style="color:yellow;">North Carolina</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/366.html">Asheville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/367.html">Boone</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/368.html">Charlotte</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/369.html">Eastern</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/370.html">Fayetteville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/371.html">Greensboro</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/372.html">Hickory</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/373.html">High Point</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/374.html">Outer Banks</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/375.html">Raleigh-Durham</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/376.html">Wilmington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/377.html">Winston-Salem</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/North Dakota.jpg"><a href="/location/35.html" style="color:yellow;">North Dakota</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/378.html">Bismarck</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/379.html">Fargo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/380.html">Grand Forks</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/381.html">Minot</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Ohio.jpg"><a href="/location/36.html" style="color:yellow;">Ohio</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/382.html">Akron/Canton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/383.html">Ashtabula</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/384.html">Athens</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/385.html">Chillicothe</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/386.html">Cincinnati</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/387.html">Cleveland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/388.html">Columbus</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/389.html">Dayton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/390.html">Huntington/Ashland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/391.html">Lakewood</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/392.html">Lima/Findlay</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/393.html">Mansfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/394.html">Sandusky</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/395.html">Toledo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/396.html">Tuscarawas County</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/397.html">Youngstown</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/398.html">Zanesville/Cambridge</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Oklahoma.jpg"><a href="/location/37.html" style="color:yellow;">Oklahoma</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/399.html">Lawton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/400.html">Norman</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/401.html">Oklahoma City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/402.html">Stillwater</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/403.html">Tulsa</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Oregon.jpg"><a href="/location/38.html" style="color:yellow;">Oregon</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/404.html">Beaverton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/405.html">Bend</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/406.html">Corvallis</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/407.html">East Oregon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/408.html">Eugene</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/409.html">Klamath Falls</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/410.html">Medford</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/411.html">Oregon Coast</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/412.html">Portland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/413.html">Roseburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/414.html">Salem</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/415.html">Tigard</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/416.html">Tualatin</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Pennsylvania.jpg"><a href="/location/39.html" style="color:yellow;">Pennsylvania</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/417.html">Allentown</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/418.html">Altoona</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/419.html">Bridgeville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/420.html">Chambersburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/421.html">Erie</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/422.html">Harrisburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/423.html">Lancaster</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/424.html">Meadville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/425.html">Penn State</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/426.html">Philadelphia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/427.html">Pittsburgh</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/428.html">Poconos</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/429.html">Reading</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/430.html">Scranton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/431.html">Verona</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/432.html">Williamsport</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/433.html">York</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Rhode Island.jpg"><a href="/location/40.html" style="color:yellow;">Rhode Island</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/434.html">Providence</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/435.html">Warwick</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/South Carolina.jpg"><a href="/location/41.html" style="color:yellow;">South Carolina</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/436.html">Charleston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/437.html">Columbia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/438.html">Florence</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/439.html">Greenville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/440.html">Hilton Head</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/441.html">Myrtle Beach</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/South Dakota.jpg"><a href="/location/42.html" style="color:yellow;">South Dakota</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/442.html">Aberdeen</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/443.html">Pierre</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/444.html">Rapid City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/445.html">Sioux Falls</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Tennessee.jpg"><a href="/location/43.html" style="color:yellow;">Tennessee</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/446.html">Chattanooga</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/447.html">Clarksville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/448.html">Cookeville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/449.html">Johnson City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/450.html">Knoxville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/451.html">Memphis</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/452.html">Nashville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/453.html">Tri-Cities</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Texas.jpg"><a href="/location/44.html" style="color:yellow;">Texas</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/454.html">Abilene</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/455.html">Amarillo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/456.html">Austin</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/457.html">Beaumont</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/458.html">Brownsville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/459.html">Clute</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/460.html">College Station</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/461.html">Corpus Christi</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/462.html">Dallas</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/463.html">Del Rio</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/464.html">Denton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/465.html">El Paso</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/466.html">Fort Worth</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/467.html">Galveston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/468.html">Harker Height</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/469.html">Houston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/470.html">Huntsville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/471.html">Irving</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/472.html">Killeen</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/473.html">Laredo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/474.html">Longview</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/475.html">Lubbock</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/476.html">Magnolia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/477.html">Mcallen</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/478.html">Mid Cities</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/479.html">Missouri City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/480.html">Odessa</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/481.html">Plano</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/482.html">San Antonio</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/483.html">San Marcos</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/484.html">Spring</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/485.html">Texarkana</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/486.html">Texoma</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/487.html">Tyler</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/488.html">Victoria</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/489.html">Waco</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/490.html">Wichita Falls</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Utah.jpg"><a href="/location/45.html" style="color:yellow;">Utah</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/491.html">Logan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/492.html">Ogden</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/493.html">Provo</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/494.html">Salt Lake City</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/495.html">St. George</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Vermont.jpg"><a href="/location/46.html" style="color:yellow;">Vermont</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/558.html">Barre</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/559.html">Bennington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/560.html">Brattleboro</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/561.html">Burlington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/562.html">Montpelier</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/563.html">Rutland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/564.html">Springfield</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/565.html">St Albans</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/566.html">Waterbury Center</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/567.html">White River Junction</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Virginia.jpg"><a href="/location/47.html" style="color:yellow;">Virginia</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/496.html">Alexandria</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/497.html">Charlottesville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/498.html">Chesapeake</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/499.html">Danville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/500.html">Fairfax</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/501.html">Fredericksburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/502.html">Glen Allen</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/503.html">Hampton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/504.html">Harrisonburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/505.html">Lynchburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/506.html">Midlothian</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/507.html">New River Valley</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/508.html">Newport News</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/509.html">Norfolk</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/510.html">Portsmouth</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/511.html">Richmond</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/512.html">Roanoke</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/513.html">Southwest Virginia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/514.html">Suffolk</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/515.html">Virginia Beach</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/516.html">Williamsburg</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Washington.jpg"><a href="/location/48.html" style="color:yellow;">Washington</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/517.html">Bellingham</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/518.html">Bothell</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/519.html">D&#039;Alene</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/520.html">Everett</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/521.html">Kennewick</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/522.html">Kent</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/523.html">Kirkland</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/524.html">Marysville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/525.html">Moses Lake</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/526.html">Mt. Vernon</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/527.html">Olympia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/528.html">Pullman</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/529.html">Seattle</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/530.html">Spokane / Coeur </a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/531.html">Tacoma</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/532.html">Tri-Cities</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/533.html">Vancouver</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/534.html">Wenatchee</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/535.html">Yakima</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Washington DC.jpg"><a href="/location/49.html" style="color:yellow;">Washington DC</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/536.html">Northern Virginia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/537.html">Washington D.c</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/West Virgini.jpg"><a href="/location/50.html" style="color:yellow;">West Virgini</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/538.html">Charleston</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/539.html">Huntington</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/540.html">Martinsburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/541.html">Morgantown</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/542.html">Parkersburg</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/543.html">Southern West </a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/544.html">Virginia</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/545.html">Wheeling</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Wisconsin.jpg"><a href="/location/51.html" style="color:yellow;">Wisconsin</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/546.html">Appleton</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/547.html">Eau Claire</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/548.html">Fond Du Lac</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/549.html">Green Bay</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/550.html">Janesville</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/551.html">La Crosse</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/552.html">Madison</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/553.html">Milwaukee</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/554.html">Racine</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/555.html">Sheboygan</a></p>
+		             					<p><a class="text-secondary font-size-18" href="/city/556.html">Wausau</a></p>
+		             				</li>
+						<li class="white-font">
+					<p class="yellow-font size-16">
+						<img src="/images/country_icon/Wyoming.jpg"><a href="/location/52.html" style="color:yellow;">Wyoming</a>
+					</p>
+          								<p><a class="text-secondary font-size-18" href="/city/557.html">Casper</a></p>
+		             				</li>
+						<div style="clear: both;"></div>
+			</ul>
+		</div>
+</div>
+	<footer id="footer">
+<!--
+<ul>
+	<li>Home</li>
+	<li>My Account</li>
+	<li>Contact</li>
+	<li>Privacy Policy Terms of Use</li>
+</ul>
+-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item text-danger"><a href="/index.html">Home</a>&nbsp;|&nbsp;</li>
+                        <li class="list-inline-item text-danger"><a href="/ads.html">My Account</a>&nbsp;|&nbsp;</li>
+                        <li class="list-inline-item text-danger"><a href="/contact.html">Contact</a>&nbsp;|&nbsp;</li>
+                        <li class="list-inline-item text-danger"><a href="/privacy-policy.html">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="/privacy-policy.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <small class="mr-1 ">
+                      www.pinkdatepage.com is an interactive computer service that enables access by multiple users and should not be treated as the publisher or speaker of any information provided by another information content provider. ©   <script>document.write(new Date().getFullYear())</script> . All Rights Reserved. <a href="/index.html">www.pinkdatepage.com </a>
+                    </small>
+                </div>
+            </div>
+</footer>
+</body>
+<script type="text/javascript">
+
+	var colCount   //定义列数
+	var colHeightArry= []   //定义列高度数组
+	var imgWidth = $('.waterfall li').outerWidth(true)   //单张图片的宽度
+
+	colCount = parseInt($('.waterfall').width()/imgWidth)   //计算出列数
+		for(var i = 0 ; i < colCount; i ++){
+	colHeightArry[i] = 0
+	}
+	//[0,0,0]
+
+	$('.waterfall li').on('load',function(){
+
+	var minValue = colHeightArry[0]  //定义最小的高度
+	var minIndex = 0  //定义最小高度的下标
+	for(var i = 0 ; i < colCount; i ++){
+		if(colHeightArry[i] < minValue){   //如果最小高度组数中的值小于最小值
+			minValue = colHeightArry[i]   //那么认为最小高度数组中的值是真正的最小值
+			minIndex = i  //最小下标为当前下标
+		}
+	}
+
+	$(this).css({
+		left: minIndex * imgWidth,
+		top: minValue
+	})
+	colHeightArry[minIndex] += $(this).outerHeight(true)
+
+	})
+
+	//当窗口大小重置之后，重新执行
+	$(window).on('resize',function(){
+		reset()
+	})
+
+
+	//当窗口加载完毕，执行瀑布流
+	$(window).on('load',function(){
+		reset()
+	})
+
+	//定义reset函数
+	function reset(){
+		var colHeightArry= []
+		colCount = parseInt($('.waterfall').width()/imgWidth)
+		for(var i = 0 ; i < colCount; i ++){
+			colHeightArry[i] = 0
+		}
+		$('.waterfall li').each(function(){
+			var minValue = colHeightArry[0]
+			var minIndex = 0
+			for(var i = 0 ; i < colCount; i ++){
+				if(colHeightArry[i] < minValue){
+					minValue = colHeightArry[i]
+					minIndex = i
+				}
+			}
+
+			$(this).css({
+				left: minIndex * imgWidth,
+				top: minValue
+			})
+			colHeightArry[minIndex] += $(this).outerHeight(true)
+	    })
+	}
+	$(function(){
+		$.get('/api/get_city_list',function(res){
+			res = eval(res);
+			$("#city_search").autocomplete(res, {
+				highlight:function(value, term){
+					if(typeof(value) == "undefined"){
+						return;
+					}
+					return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term.replace(/([\^\$\(\)\[\]\{\}\*\.\+\?\|\\])/gi, "\\$1") + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong>$1</strong>");
+				},
+				formatItem: function(row, i, max) {
+					return row.name;
+				},
+			}).result(function(event, row, formatted) {
+				$("#search_box").submit();
+			});
+		});
+		})
+</script>
+</html>
